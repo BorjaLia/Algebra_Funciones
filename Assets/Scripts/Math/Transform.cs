@@ -7,9 +7,6 @@ namespace CustomMath
 {
     public class MyTransform : IEnumerable, IEquatable<MyTransform>
     {
-        #region Variables
-
-        #endregion
 
         #region Properties
         //Properties
