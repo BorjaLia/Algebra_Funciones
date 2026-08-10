@@ -99,7 +99,7 @@ public class Frustum
 
         planeObj.transform.position = pos;
         planeObj.transform.localScale = scale;
-        planeObj.transform.rotation = Quaternion.FromToRotation(Vec3.Back, plane.normal);
+        planeObj.transform.rotation = Quaternion.FromToRotation(Vec3.back, plane.normal);
 
         MeshRenderer renderer = planeObj.GetComponent<MeshRenderer>();
         if (renderer != null)
@@ -114,6 +114,6 @@ public class Frustum
     private void UpdateVisualPlanes(GameObject planeObj, MyPlane plane, Vec3 pos)
     {
         planeObj.transform.position = pos;
-        planeObj.transform.rotation = Quaternion.FromToRotation(Vec3.Back, plane.normal);
+        planeObj.transform.rotation = Quaternion.FromToRotation(Vec3.back, plane.normal);
     }
 }

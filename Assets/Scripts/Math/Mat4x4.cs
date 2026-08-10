@@ -18,12 +18,12 @@ namespace CustomMath
         #endregion
 
         #region Properties
-        public static Mat4x4 Zero
+        public static Mat4x4 zero
         {
             get { return new Mat4x4(); }
         }
 
-        public static Mat4x4 Identity
+        public static Mat4x4 identity
         {
             get
             {
@@ -37,7 +37,7 @@ namespace CustomMath
 
         public float determinant { get { return Determinant(this); } }
 
-        public bool isIdentity { get { return this == Identity; } }
+        public bool isIdentity { get { return this == identity; } }
 
         public Quat rotation
         {
@@ -184,7 +184,7 @@ namespace CustomMath
 
             float det = b00 * b11 - b01 * b10 + b02 * b09 + b03 * b08 - b04 * b07 + b05 * b06;
 
-            if (MathF.Abs(det) < 1e-6f) return Zero; // Singular (not invertible)
+            if (MathF.Abs(det) < 1e-6f) return zero; // Singular (not invertible)
 
             float invDet = 1.0f / det;
 
@@ -224,7 +224,7 @@ namespace CustomMath
             float qxy = q.x * yy; float qxz = q.x * zz; float qyz = q.y * zz;
             float qwx = q.w * xx; float qwy = q.w * yy; float qwz = q.w * zz;
 
-            Mat4x4 res = Identity;
+            Mat4x4 res = identity;
             res.m00 = 1f - (qyy + qzz); res.m01 = qxy - qwz; res.m02 = qxz + qwy;
             res.m10 = qxy + qwz; res.m11 = 1f - (qxx + qzz); res.m12 = qyz - qwx;
             res.m20 = qxz - qwy; res.m21 = qyz + qwx; res.m22 = 1f - (qxx + qyy);
@@ -233,7 +233,7 @@ namespace CustomMath
 
         public static Mat4x4 Scale(Vec3 vector)
         {
-            Mat4x4 res = Identity;
+            Mat4x4 res = identity;
             res.m00 = vector.x;
             res.m11 = vector.y;
             res.m22 = vector.z;
@@ -242,7 +242,7 @@ namespace CustomMath
 
         public static Mat4x4 Translate(Vec3 vector)
         {
-            Mat4x4 res = Identity;
+            Mat4x4 res = identity;
             res.m03 = vector.x;
             res.m13 = vector.y;
             res.m23 = vector.z;

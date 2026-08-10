@@ -23,16 +23,16 @@ namespace CustomMath
         #endregion
 
         #region Default Values
-        public static Vec3 Zero { get { return new Vec3(0.0f, 0.0f, 0.0f); } }
-        public static Vec3 One { get { return new Vec3(1.0f, 1.0f, 1.0f); } }
-        public static Vec3 Forward { get { return new Vec3(0.0f, 0.0f, 1.0f); } }
-        public static Vec3 Back { get { return new Vec3(0.0f, 0.0f, -1.0f); } }
-        public static Vec3 Right { get { return new Vec3(1.0f, 0.0f, 0.0f); } }
-        public static Vec3 Left { get { return new Vec3(-1.0f, 0.0f, 0.0f); } }
-        public static Vec3 Up { get { return new Vec3(0.0f, 1.0f, 0.0f); } }
-        public static Vec3 Down { get { return new Vec3(0.0f, -1.0f, 0.0f); } }
-        public static Vec3 PositiveInfinity { get { return new Vec3(float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity); } }
-        public static Vec3 NegativeInfinity { get { return new Vec3(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity); } }
+        public static Vec3 zero { get { return new Vec3(0.0f, 0.0f, 0.0f); } }
+        public static Vec3 one { get { return new Vec3(1.0f, 1.0f, 1.0f); } }
+        public static Vec3 forward { get { return new Vec3(0.0f, 0.0f, 1.0f); } }
+        public static Vec3 back { get { return new Vec3(0.0f, 0.0f, -1.0f); } }
+        public static Vec3 right { get { return new Vec3(1.0f, 0.0f, 0.0f); } }
+        public static Vec3 left { get { return new Vec3(-1.0f, 0.0f, 0.0f); } }
+        public static Vec3 up { get { return new Vec3(0.0f, 1.0f, 0.0f); } }
+        public static Vec3 down { get { return new Vec3(0.0f, -1.0f, 0.0f); } }
+        public static Vec3 positiveInfinity { get { return new Vec3(float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity); } }
+        public static Vec3 negativeInfinity { get { return new Vec3(float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity); } }
         #endregion                                                                                                                                                                               
 
         #region Constructors

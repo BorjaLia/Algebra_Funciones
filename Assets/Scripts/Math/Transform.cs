@@ -1,6 +1,7 @@
 using CustomMath;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CustomMath
@@ -8,89 +9,119 @@ namespace CustomMath
     public class MyTransform : IEnumerable, IEquatable<MyTransform>
     {
 
+        #region Variables
+
+        public string name = "Transform";
+
+        private Vec3 _LocalPosition = Vec3.zero;
+        private Quat _LocalRotation = Quat.identity;
+        private Vec3 _LocalScale = Vec3.one;
+
+        private MyTransform _Parent = null;
+        private List<MyTransform> _Children = new List<MyTransform>();
+
+        private bool _HasChanged = false;
+        private int _HierarchyCapacity = 0;
+
+        private Mat4x4 _LocalToWorldMatrix = Mat4x4.identity;
+        private Mat4x4 _WorldToLocalMatrix = Mat4x4.identity;
+        private bool _IsDirty = true;
+
+        #endregion
+
         #region Properties
         //Properties
 
         #region Hierarchy
 
         //childCount	The number of children the parent Transform has.
-        public int childCount { get; private set; }
-        
+        public int childCount { get { return _Children.Count; } }
+
         //hasChanged	Has the transform changed since the last time the flag was set to 'false'?
-        public bool hasChanged;
-        
+        public bool hasChanged { get { return _HasChanged; } set { _HasChanged = value; } }
+
         //hierarchyCapacity	The transform capacity of the transform's hierarchy data structure.
-        public int hierarchyCapacity { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
-        
+        public int hierarchyCapacity { get { return _HierarchyCapacity; } set { _HierarchyCapacity = value; } }
+
         //hierarchyCount	The number of transforms in the transform's hierarchy data structure.
-        public int hierarchyCount { get { throw new NotImplementedException(); } }
-        
+        public int hierarchyCount
+        {
+            get
+            {
+                int count = 1;
+                for (int i = 0; i < _Children.Count; i++)
+                {
+                    count += _Children[i].hierarchyCount;
+                }
+                return count;
+            }
+        }
         //parent	The parent of the transform.
-        public MyTransform parent { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
+        public MyTransform parent {get { return _Parent; }set { SetParent(value); }}
 
         //root	Returns the topmost transform in the hierarchy.
         public MyTransform root { get { throw new NotImplementedException(); } }
 
-            #endregion
-            
-            #region Matrix
-        
+        #endregion
+
+        #region Matrix
+
         //localToWorldMatrix	Matrix that transforms a point from local space into world space (Read Only).
         public Mat4x4 localToWorldMatrix { get { throw new NotImplementedException(); } }
-        
+
         //worldToLocalMatrix	Matrix that transforms a point from world space into local space (Read Only).
         public Mat4x4 worldToLocalMatrix { get { throw new NotImplementedException(); } }
-            
-            #endregion
 
-            #region Directions
-        
+        #endregion
+
+        #region Directions
+
         //forward	Returns a normalized vector representing the blue axis of the transform in world space.
         public Vec3 forward { get; set; }
-        
+
         //right	The red axis of the transform in world space.
         public Vec3 right { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
-        
+
         //up	The green axis of the transform in world space.
         public Vec3 up { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
-        
-            #endregion
 
-            #region Position
-        
+        #endregion
+
+        #region Position
+
         //position	The world space position of the Transform.
         public Vec3 position { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
 
         //localPosition	Position of the transform relative to the parent transform.
         public Vec3 localPosition { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
-        
-            #endregion
 
-            #region Rotation
-        
+        #endregion
+
+        #region Rotation
+
         //eulerAngles	The rotation as Euler angles in degrees.
         public Vec3 eulerAngles { get; set; }
 
         //localEulerAngles	The rotation as Euler angles in degrees relative to the parent transform's rotation.
         public Vec3 localEulerAngles { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
-        
+
         //localRotation	The rotation of the transform relative to the transform rotation of the parent.
         public Quat localRotation { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
 
         //rotation	A Quaternion that stores the rotation of the Transform in world space.
         public Quat rotation { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
 
-            #endregion
+        #endregion
 
-            #region Scale
-        
+        #region Scale
+
         //localScale	The scale of the transform relative to the GameObjects parent.
         public Vec3 localScale { get { throw new NotImplementedException(); } set { throw new NotImplementedException(); } }
-        
+
         //lossyScale	The global scale of the object (Read Only).
         public Vec3 lossyScale { get { throw new NotImplementedException(); } }
-            
-            #endregion
+
+        #endregion
 
         #endregion
 
@@ -100,7 +131,7 @@ namespace CustomMath
         #region Methods
         //Public Methods
 
-            #region Hierarchy
+        #region Hierarchy
 
         //DetachChildren Unparents all children.
         public void DetachChildren()
@@ -161,9 +192,9 @@ namespace CustomMath
             throw new NotImplementedException();
         }
 
-            #endregion
+        #endregion
 
-            #region Position & Rotation
+        #region Position & Rotation
 
         //GetLocalPositionAndRotation Gets the local space position and rotation of the Transform component.
         public void GetLocalPositionAndRotation(out Vec3 localPosition, out Quat localRotation)
@@ -189,9 +220,9 @@ namespace CustomMath
             throw new NotImplementedException();
         }
 
-            #endregion
+        #endregion
 
-            #region Rotation
+        #region Rotation
 
         //LookAt  Rotates the transform so the forward vector points at /target/'s current position.
         public void LookAt(MyTransform target)
@@ -251,9 +282,9 @@ namespace CustomMath
             throw new NotImplementedException();
         }
 
-            #endregion
+        #endregion
 
-            #region Translation
+        #region Translation
 
         //Translate Moves the transform in the direction and distance of translation.
         public void Translate(Vec3 translation)
@@ -286,11 +317,11 @@ namespace CustomMath
             throw new NotImplementedException();
         }
 
-            #endregion
+        #endregion
 
-            #region Coordinate Transformations
+        #region Coordinate Transformations
 
-                #region Transformations
+        #region Transformations
 
         //TransformDirection Transforms direction from local space to world space.
         public Vec3 TransformDirection(Vec3 direction)
@@ -355,9 +386,9 @@ namespace CustomMath
             throw new NotImplementedException();
         }
 
-                #endregion
+        #endregion
 
-                #region Inverse Transformations
+        #region Inverse Transformations
 
         //InverseTransformDirection Transforms a direction from world space to local space. The opposite of Transform.TransformDirection.
         public Vec3 InverseTransformDirection(Vec3 direction)
