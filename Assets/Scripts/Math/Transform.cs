@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CustomMath
 {
-    public struct MyTransform : IEnumerable, IEquatable<MyTransform>
+    public class MyTransform : IEnumerable, IEquatable<MyTransform>
     {
         #region Properties
         //Properties
@@ -421,20 +421,58 @@ namespace CustomMath
             throw new NotImplementedException();
         }
 
-                #endregion
+        #endregion
 
-            #endregion
+        #endregion
 
-            #region Interfaces & Overrides
+        #endregion
+
+        #region Operators
+        //Operators
+
+        //operator ==	Compares two object references to see if they refer to the same object.
+        public static bool operator ==(MyTransform lhs, MyTransform rhs)
+        {
+            if (lhs == null && rhs == null) return true;
+            if (lhs == null || rhs == null) return false;
+
+            return (object)lhs.parent == (object)rhs.parent &&
+                   lhs.localPosition == rhs.localPosition &&
+                   lhs.localRotation == rhs.localRotation &&
+                   lhs.localScale == rhs.localScale;
+        }
+
+        //operator !=	Compares if two objects refer to a different object.
+        public static bool operator !=(MyTransform lhs, MyTransform rhs)
+        {
+            return !(lhs == rhs);
+        }
+
+        public static implicit operator MyTransform(UnityEngine.Transform unityTransform)
+        {
+            if (unityTransform == null) return null;
+
+            MyTransform newTransform = new MyTransform();
+
+            newTransform.localPosition = new Vec3(unityTransform.localPosition);
+            newTransform.localRotation = new Quat(unityTransform.localRotation);
+            newTransform.localScale = new Vec3(unityTransform.localScale);
+
+            return newTransform;
+        }
+
+        #endregion
+
+        #region Interfaces & Overrides
 
         public bool Equals(MyTransform other)
         {
-            throw new NotImplementedException();
+            return this == other;
         }
 
         public override bool Equals(object obj)
         {
-            throw new NotImplementedException();
+            return Equals(obj as MyTransform);
         }
 
         public override int GetHashCode()
@@ -443,35 +481,6 @@ namespace CustomMath
         }
 
         public IEnumerator GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-
-            #endregion
-
-        #endregion
-
-        #region Operators
-        //Operators
-
-        //operator !=	Compares if two objects refer to a different object.
-        public static bool operator !=(MyTransform lhs, MyTransform rhs)
-        {
-            throw new NotImplementedException();
-        }
-
-        //operator ==	Compares two object references to see if they refer to the same object.
-        public static bool operator ==(MyTransform lhs, MyTransform rhs)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static implicit operator UnityEngine.Transform(MyTransform myTransform)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static implicit operator MyTransform(UnityEngine.Transform unityTransform)
         {
             throw new NotImplementedException();
         }
