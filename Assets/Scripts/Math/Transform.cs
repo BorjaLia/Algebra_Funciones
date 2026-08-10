@@ -7,11 +7,15 @@ namespace CustomMath
 {
     public class MyTransform : IEnumerable, IEquatable<MyTransform>
     {
+        #region Variables
+
+        #endregion
+
         #region Properties
         //Properties
 
-            #region Hierarchy
-        
+        #region Hierarchy
+
         //childCount	The number of children the parent Transform has.
         public int childCount { get; private set; }
         
