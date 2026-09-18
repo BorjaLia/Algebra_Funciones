@@ -8,7 +8,6 @@ namespace CustomMath
 {
     public class MyTransform : IEnumerable, IEquatable<MyTransform>
     {
-
         #region Variables
 
         public string name = "Transform";
@@ -57,10 +56,21 @@ namespace CustomMath
             }
         }
         //parent	The parent of the transform.
-        public MyTransform parent {get { return _Parent; }set { SetParent(value); }}
+        public MyTransform parent { get { return _Parent; } set { SetParent(value); } }
 
         //root	Returns the topmost transform in the hierarchy.
-        public MyTransform root { get { throw new NotImplementedException(); } }
+        public MyTransform root
+        {
+            get
+            {
+                MyTransform current = this;
+                while (current.parent != null)
+                {
+                    current = current.parent;
+                }
+                return current;
+            }
+        }
 
         #endregion
 
@@ -136,7 +146,10 @@ namespace CustomMath
         //DetachChildren Unparents all children.
         public void DetachChildren()
         {
-            throw new NotImplementedException();
+            for (int i = _Children.Count - 1; i >= 0; i--)
+            {
+                _Children[i].SetParent(null, true);
+            }
         }
 
         //Find    Finds a child by n and returns it.
@@ -148,7 +161,10 @@ namespace CustomMath
         //GetChild Returns a transform child by index.
         public MyTransform GetChild(int index)
         {
-            throw new NotImplementedException();
+            if (index < 0 || index >= _Children.Count)
+                throw new ArgumentOutOfRangeException(nameof(index), "GetChild out of range!");
+
+            return _Children[index];
         }
 
         //GetSiblingIndex Gets the sibling index.
