@@ -14,7 +14,7 @@ namespace CustomMath
 
         private Vec3 _LocalPosition = Vec3.zero;
         private Quat _LocalRotation = Quat.identity;
-        private Vec3 _LocalScale = Vec3.one;
+        private Vec3 _LocalScale { get { return _LocalScale; } }
 
         private MyTransform _Parent = null;
         private List<MyTransform> _Children = new List<MyTransform>();
@@ -161,16 +161,15 @@ namespace CustomMath
         //GetChild Returns a transform child by index.
         public MyTransform GetChild(int index)
         {
-            if (index < 0 || index >= _Children.Count)
-                throw new ArgumentOutOfRangeException(nameof(index), "GetChild out of range!");
-
+            if (index < 0 || index >= _Children.Count) throw new ArgumentOutOfRangeException(nameof(index), "GetChild out of range!");
             return _Children[index];
         }
 
         //GetSiblingIndex Gets the sibling index.
         public int GetSiblingIndex()
         {
-            throw new NotImplementedException();
+            if (_Parent == null) return 0;
+            return _Parent._Children.IndexOf(this);
         }
 
         //IsChildOf Is this transform a child of parent?

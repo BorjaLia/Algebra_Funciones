@@ -201,7 +201,7 @@ namespace CustomMath
 
         public static Quat LookRotation(Vec3 forward)
         {
-            return LookRotation(forward, Vec3.Up);
+            return LookRotation(forward);
         }
 
         public static Quat LookRotation(Vec3 forward, [DefaultValue("Vec3.up")] Vec3 upwards)
@@ -409,7 +409,7 @@ namespace CustomMath
             else
             {
                 angle = 0f;
-                axis = Vec3.Right;
+                axis = Vec3.right;
             }
         }
 
