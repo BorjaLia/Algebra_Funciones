@@ -64,7 +64,55 @@ namespace CustomMath
 
         #endregion
         
+        #region Selection Sort
 
+        /*
+         *  Costo computacional
+         *  Mejor:      O(n^2)
+         *  Promedio:   O(n^2)
+         *  Peor:       O(n^2)
+         *  
+         *  Complejidad espacial:   O(1) auxiliar
+         */
+
+        /*
+         *  Divide el arreglo en dos partes una sublista ordenada (al principio) 
+         *  y otra desordenada. (el primer for loop)
+         *  En cada iteracion busca el elemento  más pequeño en la 
+         *  parte desordenada y lo intercambia con el primer 
+         *  elemento de esa parte desordenada.
+         */
+
+        public static void SelectionSort<T>(T[] array) where T : IComparable<T>
+        {
+            if (array == null || array.Length <= 1) return;
+
+            int n = array.Length;
+
+            //todo el array
+            for (int i = 0; i < n - 1; i++)
+            {
+                int minIndex = i;
+
+                //parte desordenada
+                for (int j = i + 1; j < n; j++)
+                {
+                    if (array[j].CompareTo(array[minIndex]) < 0)
+                    {
+                        minIndex = j;
+                    }
+                }
+
+                if (minIndex != i)
+                {
+                    T temp = array[i];
+                    array[i] = array[minIndex];
+                    array[minIndex] = temp;
+                }
+            }
+        }
+
+        #endregion
         
         #region Bitonic
 
@@ -88,23 +136,18 @@ namespace CustomMath
         {
             if (array == null || array.Length <= 1) return;
 
-            // Bitonic Sort tradicional requiere que la longitud sea potencia de 2
             bool isPowerOfTwo = (array.Length != 0) && ((array.Length & (array.Length - 1)) == 0);
             if (!isPowerOfTwo)
             {
                 throw new ArgumentException("Bitonic Sort requires the array to have a length equal to a power of two");
             }
 
-            // up = 1 -> ascendente, up = 0 -> descendente
             int up = 1;
             BitonicSortRecursive(array, 0, array.Length, up);
 
-            /* ================= FUNCIONES LOCALES ================= */
 
-            // Compara e intercambia elementos basándose en la dirección
             void CompAndSwap(T[] arr, int i, int j, int direction)
             {
-                // arr[i].CompareTo(arr[j]) > 0 equivale a arr[i] > arr[j]
                 if ((direction == 1 && arr[i].CompareTo(arr[j]) > 0) ||
                     (direction == 0 && arr[i].CompareTo(arr[j]) < 0))
                 {
@@ -114,7 +157,6 @@ namespace CustomMath
                 }
             }
 
-            // Fusiona recursivamente una secuencia bitónica para ordenarla
             void BitonicMerge(T[] arr, int low, int cnt, int direction)
             {
                 if (cnt > 1)
@@ -129,20 +171,16 @@ namespace CustomMath
                 }
             }
 
-            // Construye de forma recursiva secuencias bitónicas y las ordena
             void BitonicSortRecursive(T[] arr, int low, int cnt, int direction)
             {
                 if (cnt > 1)
                 {
                     int k = cnt / 2;
 
-                    // Ordena la primera mitad de forma ascendente
                     BitonicSortRecursive(arr, low, k, 1);
 
-                    // Ordena la segunda mitad de forma descendente
                     BitonicSortRecursive(arr, low + k, k, 0);
 
-                    // Fusiona la secuencia entera en la dirección indicada
                     BitonicMerge(arr, low, cnt, direction);
                 }
             }
@@ -150,6 +188,5 @@ namespace CustomMath
 
         #endregion
         
-
     }
 }
