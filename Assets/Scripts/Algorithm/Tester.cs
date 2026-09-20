@@ -1,134 +1,139 @@
 using CustomMath;
 using System;
-using System.Text;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class AlgorithmTester : MonoBehaviour
 {
-    [Header("Configuración del Array")]
-    [Tooltip("Cantidad de elementos que tendrá el array a ordenar.")]
+    [Header("Array Config")]
+    [Tooltip("Size")]
     public int arraySize = 100;
 
-    [Tooltip("Valor mínimo (inclusivo) para los números aleatorios.")]
+    [Tooltip("Min (inclusive)")]
     public int minValue = 0;
 
-    [Tooltip("Valor máximo (exclusivo) para los números aleatorios.")]
+    [Tooltip("Max (inclusive)")]
     public int maxValue = 1000;
 
     private void Start()
     {
-        RunAllTests();
+        StartCoroutine(RunAllTestsCoroutine());
     }
 
     private void Update()
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            RunAllTests();
+            StartCoroutine(RunAllTestsCoroutine());
         }
     }
 
-    private void RunAllTests()
+    private IEnumerator RunAllTestsCoroutine()
     {
-        // 1. Generar el array aleatorio base para esta ronda de pruebas
         int[] originalArray = GenerateRandomArray();
 
-        // Usamos StringBuilder para construir un solo gran string y hacer un solo Debug.Log al final
-        StringBuilder report = new StringBuilder();
-        report.AppendLine("Tests de algoritmos:\n");
+        UnityEngine.Debug.Log($"<color=cyan>--- Start Test (size {arraySize}) ---</color>");
 
-        report.AppendLine(originalArray.ToString());
+        List<Task<string>> pendingTasks = new List<Task<string>>
+        {
+             //O(n!)
+            Task.Run(() => RunTest("Bogo Sort", Algorithm.BogoSort, originalArray)),
+            
+            //O(n^2)
+            Task.Run(() => RunTest("Selection Sort", Algorithm.SelectionSort, originalArray)),
+            Task.Run(() => RunTest("Bubble Sort", Algorithm.BubbleSort, originalArray)),
+            Task.Run(() => RunTest("Insertion Sort", Algorithm.InsertionSort, originalArray)),
+            Task.Run(() => RunTest("Cocktail Shaker Sort", Algorithm.CocktailShakerSort, originalArray)),
+            Task.Run(() => RunTest("Gnome Sort", Algorithm.GnomeSort, originalArray)),
 
-        // 2. Ejecutar cada algoritmo.
-        // Le pasamos el nombre, la referencia al método estático y el array original.
-        TestAlgorithm("Bitonic", Algorithm.BitonicSort, originalArray, report);
-        TestAlgorithm("Selection Sort", Algorithm.SelectionSort, originalArray, report);
-        TestAlgorithm("Cocktail Shaker Sort", Algorithm.CocktailShakerSort, originalArray, report);
-        TestAlgorithm("Quick Sort", Algorithm.QuickSort, originalArray, report);
-        TestAlgorithm("Radix Sort (LSD)", Algorithm.RadixSortLSD, originalArray, report);
-        TestAlgorithm("Shell Sort", Algorithm.ShellSort, originalArray, report);
-        TestAlgorithm("Bogo Sort", Algorithm.BogoSort, originalArray, report);
-        TestAlgorithm("Radix Sort (MSD)", Algorithm.RadixSortMSD, originalArray, report);
-        TestAlgorithm("Intro Sort", Algorithm.IntroSort, originalArray, report);
-        TestAlgorithm("Adaptive Merge Sort", Algorithm.AdaptiveMergeSort, originalArray, report);
-        TestAlgorithm("Bubble Sort", Algorithm.BubbleSort, originalArray, report);
-        TestAlgorithm("Gnome Sort", Algorithm.GnomeSort, originalArray, report);
-        TestAlgorithm("Merge Sort", Algorithm.MergeSort, originalArray, report);
-        TestAlgorithm("Heap Sort", Algorithm.HeapSort, originalArray, report);
-        TestAlgorithm("Insertion Sort", Algorithm.InsertionSort, originalArray, report);
+            //O(n^3/2) - O(n log^2 n)
+            Task.Run(() => RunTest("Shell Sort", Algorithm.ShellSort, originalArray)),
+            Task.Run(() => RunTest("Bitonic Sort", Algorithm.BitonicSort, originalArray)),
 
-        // 3. Imprimir el resultado en la consola de Unity
-        Debug.Log(report.ToString());
+            //O(n log n)
+            Task.Run(() => RunTest("Quick Sort", Algorithm.QuickSort, originalArray)),
+            Task.Run(() => RunTest("Merge Sort", Algorithm.MergeSort, originalArray)),
+            Task.Run(() => RunTest("Heap Sort", Algorithm.HeapSort, originalArray)),
+            Task.Run(() => RunTest("Intro Sort", Algorithm.IntroSort, originalArray)),
+            Task.Run(() => RunTest("Adaptive Merge Sort", Algorithm.AdaptiveMergeSort, originalArray)),
+
+            //O(n)
+            Task.Run(() => RunTest("Radix Sort (LSD)", Algorithm.RadixSortLSD, originalArray)),
+            Task.Run(() => RunTest("Radix Sort (MSD)", Algorithm.RadixSortMSD, originalArray))
+        };
+
+        while (pendingTasks.Count > 0)
+        {
+            for (int i = pendingTasks.Count - 1; i >= 0; i--)
+            {
+                if (pendingTasks[i].IsCompleted)
+                {
+                    UnityEngine.Debug.Log(pendingTasks[i].Result);
+
+                    pendingTasks.RemoveAt(i);
+                }
+            }
+            yield return null;
+        }
+
+        UnityEngine.Debug.Log("<color=cyan>--- Tests have ended ---</color>");
     }
 
-    /// <summary>
-    /// Genera un array de enteros aleatorios basado en las propiedades del inspector.
-    /// </summary>
     private int[] GenerateRandomArray()
     {
         int[] arr = new int[arraySize];
         for (int i = 0; i < arraySize; i++)
         {
-            // Unity Random.Range para enteros es inclusivo en el mínimo y exclusivo en el máximo
             arr[i] = UnityEngine.Random.Range(minValue, maxValue);
         }
         return arr;
     }
 
-    /// <summary>
-    /// Toma el método de ordenamiento, lo ejecuta de manera segura en una copia del array
-    /// y verifica si logró ordenarlo. Agrega el resultado al reporte.
-    /// </summary>
-    private void TestAlgorithm(string name, Action<int[]> sortMethod, int[] originalArray, StringBuilder report)
+    private string RunTest(string name, Action<int[]> sortMethod, int[] originalArray)
     {
-        // Hacemos una copia profunda del array para que cada algoritmo se enfrente
-        // al mismo desafío desordenado, sin beneficiarse del ordenamiento de algoritmos previos.
         int[] arrayCopy = new int[originalArray.Length];
         Array.Copy(originalArray, arrayCopy, originalArray.Length);
 
         bool success = false;
+        Stopwatch stopwatch = new Stopwatch();
 
         try
         {
-            // Ejecutamos el algoritmo
+            stopwatch.Start();
             sortMethod(arrayCopy);
+            stopwatch.Stop();
 
-            // Si el método no tiró excepción, verificamos si realmente está ordenado
             success = IsSorted(arrayCopy);
         }
         catch (NotImplementedException)
         {
-            // Atrapamos la excepción del esqueleto para que el test no se rompa
+            stopwatch.Stop();
             success = false;
         }
         catch (Exception ex)
         {
-            // Atrapamos cualquier otro error (índices fuera de rango, stack overflow, etc.)
-            Debug.LogWarning($"El algoritmo {name} falló con una excepción: {ex.Message}");
-            success = false;
+            stopwatch.Stop();
+            return $"{name}: Failed: {ex.Message} ({stopwatch.ElapsedMilliseconds} ms)";
         }
 
-        // Formateamos la salida esperada
-        report.AppendLine($"{name}: {(success ? "Logrado" : "No logrado")}");
+        return $"{name}: {(success ? "Success" : "Failed")} ({stopwatch.ElapsedMilliseconds} ms)";
     }
 
-    /// <summary>
-    /// Función auxiliar genérica que verifica si un array está ordenado de menor a mayor.
-    /// </summary>
     private bool IsSorted<T>(T[] array) where T : IComparable<T>
     {
         if (array == null || array.Length <= 1) return true;
 
         for (int i = 0; i < array.Length - 1; i++)
         {
-            // Si el elemento actual es mayor que el siguiente, la lista no está ordenada
             if (array[i].CompareTo(array[i + 1]) > 0)
             {
                 return false;
             }
         }
-
         return true;
     }
 }
