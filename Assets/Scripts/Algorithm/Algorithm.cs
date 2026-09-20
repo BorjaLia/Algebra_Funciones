@@ -163,6 +163,69 @@ namespace CustomMath
 
         #endregion
         
+        #region Cocktail Shaker Sort
+
+        /*
+         *  Costo computacional
+         *  Mejor:      O(n)
+         *  Promedio:   O(n^2)
+         *  Peor:       O(n^2)
+         *  
+         *  Complejidad espacial:   O(1) auxiliar
+         */
+
+        /*
+         *  Igual que un bubble sort pero ordena hacia ambos lados
+         *  al mismo tiempo
+         */
+
+        public static void CocktailShakerSort<T>(T[] array) where T : IComparable<T>
+        {
+            if (array == null || array.Length <= 1) return;
+
+            bool swapped = true;
+            int start = 0;
+            int end = array.Length;
+
+            while (swapped)
+            {
+                swapped = false;
+
+                for (int i = start; i < end - 1; ++i)
+                {
+                    if (array[i].CompareTo(array[i + 1]) > 0)
+                    {
+                        T temp = array[i];
+                        array[i] = array[i + 1];
+                        array[i + 1] = temp;
+                        swapped = true;
+                    }
+                }
+
+                if (!swapped)
+                    break;
+
+                swapped = false;
+
+                end = end - 1;
+
+                for (int i = end - 1; i >= start; i--)
+                {
+                    if (array[i].CompareTo(array[i + 1]) > 0)
+                    {
+                        T temp = array[i];
+                        array[i] = array[i + 1];
+                        array[i + 1] = temp;
+                        swapped = true;
+                    }
+                }
+
+                start = start + 1;
+            }
+        }
+
+        #endregion
+        
         #region Bitonic
 
         /*
