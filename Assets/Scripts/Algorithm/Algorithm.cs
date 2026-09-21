@@ -926,5 +926,89 @@ namespace CustomMath
 
         #endregion
 
+        #region Radix Sort (MSD)
+
+        /*
+         *  Costo computacional
+         *  Mejor:      O(d * (n + k))
+         *  Promedio:   O(d * (n + k))
+         *  Peor:       O(d * (n + k))
+         *  
+         *  Complejidad espacial:   O(n + k)
+         */
+        public static void RadixSortMSD<T>(T[] array) where T : IComparable<T>
+        {
+            if (array == null || array.Length <= 1) return;
+
+            int n = array.Length;
+
+            int min = Convert.ToInt32(array[0]);
+            int max = Convert.ToInt32(array[0]);
+            for (int i = 1; i < n; i++)
+            {
+                int val = Convert.ToInt32(array[i]);
+                if (val > max) max = val;
+                if (val < min) min = val;
+            }
+
+            int offset = min < 0 ? -min : 0;
+            max += offset;
+
+            int exp = 1;
+            while (max / exp >= 10)
+            {
+                exp *= 10;
+            }
+
+            RadixSortMSDRecursive(array, 0, n, exp, offset);
+
+            void RadixSortMSDRecursive(T[] arr, int lo, int hi, int d, int off)
+            {
+                if (hi <= lo + 1 || d == 0) return;
+
+                T[] output = new T[hi - lo];
+                int[] count = new int[10];
+
+                for (int i = lo; i < hi; i++)
+                {
+                    int val = Convert.ToInt32(arr[i]) + off;
+                    int digit = (val / d) % 10;
+                    count[digit]++;
+                }
+
+                int[] bucketOffsets = new int[10];
+                bucketOffsets[0] = 0;
+                for (int i = 1; i < 10; i++)
+                {
+                    bucketOffsets[i] = bucketOffsets[i - 1] + count[i - 1];
+                }
+
+                int[] insertPos = new int[10];
+                Array.Copy(bucketOffsets, insertPos, 10);
+
+                for (int i = lo; i < hi; i++)
+                {
+                    int val = Convert.ToInt32(arr[i]) + off;
+                    int digit = (val / d) % 10;
+                    output[insertPos[digit]++] = arr[i];
+                }
+
+                for (int i = 0; i < output.Length; i++)
+                {
+                    arr[lo + i] = output[i];
+                }
+
+                for (int i = 0; i < 10; i++)
+                {
+                    if (count[i] > 1)
+                    {
+                        RadixSortMSDRecursive(arr, lo + bucketOffsets[i], lo + bucketOffsets[i] + count[i], d / 10, off);
+                    }
+                }
+            }
+        }
+
+        #endregion
+
     }
 }
