@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 524b89319f1ba2346923ff64165fb3de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AlgorithmTester
-  arraySize: 1024
+  arraySize: 10000
   minValue: -100
   maxValue: 100
 --- !u!4 &388114582
