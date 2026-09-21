@@ -857,5 +857,74 @@ namespace CustomMath
 
         #endregion
 
+        #region Radix Sort (LSD)
+
+        /*
+         *  Costo computacional
+         *  donde d es el num de dígitos y k es la base (10)
+         *  Mejor:      O(d * (n + k))
+         *  Promedio:   O(d * (n + k))
+         *  Peor:       O(d * (n + k))
+         *  
+         *  Complejidad espacial:   O(n + k)
+         */
+
+        public static void RadixSortLSD<T>(T[] array) where T : IComparable<T>
+        {
+            if (array == null || array.Length <= 1) return;
+
+            int n = array.Length;
+
+            int min = Convert.ToInt32(array[0]);
+            int max = Convert.ToInt32(array[0]);
+            for (int i = 1; i < n; i++)
+            {
+                int val = Convert.ToInt32(array[i]);
+                if (val > max) max = val;
+                if (val < min) min = val;
+            }
+
+            int offset = min < 0 ? -min : 0;
+            max += offset;
+
+            for (int exp = 1; max / exp > 0; exp *= 10)
+            {
+                CountSortLSD(array, n, exp, offset);
+            }
+
+
+            void CountSortLSD(T[] arr, int length, int exp, int off)
+            {
+                T[] output = new T[length];
+                int[] count = new int[10];
+
+                for (int i = 0; i < length; i++)
+                {
+                    int val = Convert.ToInt32(arr[i]) + off;
+                    count[(val / exp) % 10]++;
+                }
+
+                for (int i = 1; i < 10; i++)
+                {
+                    count[i] += count[i - 1];
+                }
+
+                for (int i = length - 1; i >= 0; i--)
+                {
+                    int val = Convert.ToInt32(arr[i]) + off;
+                    int digit = (val / exp) % 10;
+                    output[count[digit] - 1] = arr[i];
+                    count[digit]--;
+                }
+
+                for (int i = 0; i < length; i++)
+                {
+                    arr[i] = output[i];
+                }
+            }
+        }
+
+        #endregion
+
     }
 }
