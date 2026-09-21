@@ -560,5 +560,65 @@ namespace CustomMath
 
         #endregion
 
+        #region Heap Sort
+
+        /*
+         *  Costo computacional
+         *  Mejor:      O(n log n)
+         *  Promedio:   O(n log n)
+         *  Peor:       O(n log n)
+         *  
+         *  Complejidad espacial:   O(1) auxiliar
+         */
+
+        public static void HeapSort<T>(T[] array) where T : IComparable<T>
+        {
+            if (array == null || array.Length <= 1) return;
+
+            int n = array.Length;
+
+            for (int i = n / 2 - 1; i >= 0; i--)
+            {
+                Heapify(array, n, i);
+            }
+
+            for (int i = n - 1; i > 0; i--)
+            {
+                T temp = array[0];
+                array[0] = array[i];
+                array[i] = temp;
+
+                Heapify(array, i, 0);
+            }
+
+            void Heapify(T[] arr, int size, int rootIndex)
+            {
+                int largest = rootIndex;
+                int left = 2 * rootIndex + 1;
+                int right = 2 * rootIndex + 2;
+
+                if (left < size && arr[left].CompareTo(arr[largest]) > 0)
+                {
+                    largest = left;
+                }
+
+                if (right < size && arr[right].CompareTo(arr[largest]) > 0)
+                {
+                    largest = right;
+                }
+
+                if (largest != rootIndex)
+                {
+                    T swapTemp = arr[rootIndex];
+                    arr[rootIndex] = arr[largest];
+                    arr[largest] = swapTemp;
+
+                    Heapify(arr, size, largest);
+                }
+            }
+        }
+
+        #endregion
+
     }
 }
