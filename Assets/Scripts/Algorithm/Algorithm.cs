@@ -312,6 +312,43 @@ namespace CustomMath
 
         #endregion
 
+        #region Shell Sort
+
+        /*
+         *  Costo computacional
+         *  Mejor:      O(n log n)
+         *  Promedio:   O(n^(1.25)) a O(n^(1.5))
+         *  Peor:       O(n^2)
+         *  
+         *  Complejidad espacial:   O(1) auxiliar
+         */
+
+        public static void ShellSort<T>(T[] array) where T : IComparable<T>
+        {
+            if (array == null || array.Length <= 1) return;
+
+            int n = array.Length;
+
+            for (int gap = n / 2; gap > 0; gap /= 2)
+            {
+                for (int i = gap; i < n; i++)
+                {
+                    T temp = array[i];
+                    int j = i;
+
+                    while (j >= gap && array[j - gap].CompareTo(temp) > 0)
+                    {
+                        array[j] = array[j - gap];
+                        j -= gap;
+                    }
+
+                    array[j] = temp;
+                }
+            }
+        }
+
+        #endregion
+
         #region Bitonic
 
         /*
