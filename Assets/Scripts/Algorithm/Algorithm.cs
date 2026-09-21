@@ -264,7 +264,54 @@ namespace CustomMath
         }
 
         #endregion
-        
+
+        #region Gnome Sort
+
+        /*
+         *  Costo computacional
+         *  Mejor:      O(n)
+         *  Promedio:   O(n^2)
+         *  Peor:       O(n^2)
+         *  
+         *  Complejidad espacial:   O(1) auxiliar
+         */
+
+        /*
+         *  Gnome Sort recorre todo el array revisando pares de numeros
+         *  si estan ordenados, pasa al siguiente par.
+         *  si no, los cambia.
+         */
+
+        public static void GnomeSort<T>(T[] array) where T : IComparable<T>
+        {
+            if (array == null || array.Length <= 1) return;
+
+            int n = array.Length;
+            int index = 0;
+
+            while (index < n)
+            {
+                if (index == 0)
+                {
+                    index++;
+                }
+
+                if (array[index].CompareTo(array[index - 1]) >= 0)
+                {
+                    index++;
+                }
+                else
+                {
+                    T temp = array[index];
+                    array[index] = array[index - 1];
+                    array[index - 1] = temp;
+                    index--;
+                }
+            }
+        }
+
+        #endregion
+
         #region Bitonic
 
         /*
