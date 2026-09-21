@@ -766,5 +766,96 @@ namespace CustomMath
 
         #endregion
 
+        #region Adaptive Merge Sort
+
+        /*
+         *  Costo computacional
+         *  Mejor:      O(n)
+         *  Promedio:   O(n log n)
+         *  Peor:       O(n log n)
+         *  
+         *  Complejidad espacial:   O(n) auxiliar
+         */
+
+        public static void AdaptiveMergeSort<T>(T[] array) where T : IComparable<T>
+        {
+            if (array == null || array.Length <= 1) return;
+
+            int n = array.Length;
+            T[] temp = new T[n];
+            bool sorted = false;
+
+            while (!sorted)
+            {
+                sorted = true;
+                int left = 0;
+
+                while (left < n)
+                {
+                    int mid = left;
+
+                    while (mid < n - 1 && array[mid].CompareTo(array[mid + 1]) <= 0)
+                    {
+                        mid++;
+                    }
+
+                    if (mid == n - 1)
+                    {
+                        break;
+                    }
+
+                    int right = mid + 1;
+
+                    while (right < n - 1 && array[right].CompareTo(array[right + 1]) <= 0)
+                    {
+                        right++;
+                    }
+
+                    MergeRuns(array, temp, left, mid, right);
+
+                    sorted = false;
+
+                    left = right + 1;
+                }
+            }
+
+
+            void MergeRuns(T[] arr, T[] tmp, int l, int m, int r)
+            {
+                int i = l;
+                int j = m + 1;
+                int k = l;
+
+                while (i <= m && j <= r)
+                {
+                    if (arr[i].CompareTo(arr[j]) <= 0)
+                    {
+                        tmp[k++] = arr[i++];
+                    }
+                    else
+                    {
+                        tmp[k++] = arr[j++];
+                    }
+                }
+
+                while (i <= m)
+                {
+                    tmp[k++] = arr[i++];
+                }
+
+                while (j <= r)
+                {
+                    tmp[k++] = arr[j++];
+                }
+
+                for (int p = l; p <= r; p++)
+                {
+                    arr[p] = tmp[p];
+                }
+            }
+        }
+
+        #endregion
+
     }
 }
