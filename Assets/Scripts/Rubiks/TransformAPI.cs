@@ -43,4 +43,17 @@ public class CustomTransformBridge : MonoBehaviour
         debugEulerAngles = new Vector3(euler.x, euler.y, euler.z);
         debugScale = new Vector3(scale.x, scale.y, scale.z);
     }
+
+    public void SetDualParent(CustomTransformBridge newParentBridge)
+    {
+        if (newParentBridge == null) return;
+
+        customTransform.SetParent(newParentBridge.customTransform);
+
+        transform.SetParent(newParentBridge.transform, true);
+
+        transform.localPosition = new Vec3(customTransform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
+        transform.localRotation = new Quat(transform.localRotation.x, transform.localRotation.y, transform.localRotation.z, transform.localRotation.w);
+        transform.localScale = new Vec3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+    }
 }

@@ -571,6 +571,13 @@ namespace CustomMath
          *  Complejidad espacial:   O(1) auxiliar
          */
 
+        /*
+         *  Heap sort construye un Max Heap (como si fuera una estructura de nodos).
+         *  Compara los nodos hijos con el padre y los intercambia si son mayores.
+         *  una vez completa esto, mueve el valor mayor al final del array.
+         *  repite estos pasos hasta ordenar el array
+         */
+
         public static void HeapSort<T>(T[] array) where T : IComparable<T>
         {
             if (array == null || array.Length <= 1) return;
@@ -630,6 +637,15 @@ namespace CustomMath
          *  
          *  Complejidad espacial:   O(log n)
          */
+
+        /*
+         * Intro sort mezcla
+         * quick sort,
+         * heap sort
+         * e insertion sort
+         */
+
+
         public static void IntroSort<T>(T[] array) where T : IComparable<T>
         {
             if (array == null || array.Length <= 1) return;
@@ -777,6 +793,11 @@ namespace CustomMath
          *  Complejidad espacial:   O(n) auxiliar
          */
 
+        /*
+         * Adaptive merge sort busca secciones ordenadas del array
+         * para ir juntandolas
+         */
+
         public static void AdaptiveMergeSort<T>(T[] array) where T : IComparable<T>
         {
             if (array == null || array.Length <= 1) return;
@@ -867,6 +888,13 @@ namespace CustomMath
          *  Peor:       O(d * (n + k))
          *  
          *  Complejidad espacial:   O(n + k)
+         */
+
+        /*
+         * Radix ordena los valores separandolos digito por digito.
+         * ordena primero por el tipo de digito mas alto (si es 100,
+         * comienza ordenando por el digito en el lugar de los 100
+         * en todos los elementos)
          */
 
         public static void RadixSortLSD<T>(T[] array) where T : IComparable<T>

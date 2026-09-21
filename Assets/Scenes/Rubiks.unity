@@ -291,6 +291,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!1 &729050903
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +339,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!1 &862972363
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,6 +413,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!1 &961739749
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,7 +584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RubikInput
   isPositiveRotation: 1
   scrambleMoves: 20
-  rootBridge: {fileID: 862972365}
+  rootBridge: {fileID: 6588386505244644653}
   rootMoveSpeed: 3
   rootRotSpeed: 90
   rootScaleSpeed: 2
@@ -639,6 +648,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1648058745
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,7 +681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RubiksController
   inputManager: {fileID: 1034723727}
-  rootCube: {fileID: 6638141737218645859}
+  rootCube: {fileID: 862972365}
   faceAxes:
   - faceName: Up
     normalDir:
@@ -790,6 +802,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1961562611
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,6 +850,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!1 &2087119642
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,6 +898,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!33 &248820628695604594
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1843,6 +1864,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!4 &3823541182514913077
 Transform:
   m_ObjectHideFlags: 0
@@ -2192,6 +2216,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!33 &5007466616035650422
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2400,6 +2427,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!23 &5740543340217018040
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2461,6 +2491,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!4 &5775152055142698902
 Transform:
   m_ObjectHideFlags: 0
@@ -2568,6 +2601,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!23 &5971152247755118632
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2652,6 +2688,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!4 &6260034905697378298
 Transform:
   m_ObjectHideFlags: 0
@@ -2694,6 +2733,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!23 &6367607626518635529
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2778,6 +2820,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!1 &6518166856482721213
 GameObject:
   m_ObjectHideFlags: 0
@@ -2836,6 +2881,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!1 &6588386505244644652
 GameObject:
   m_ObjectHideFlags: 0
@@ -2845,6 +2893,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5775152055142698902}
+  - component: {fileID: 6588386505244644653}
   m_Layer: 0
   m_Name: CubeRubik
   m_TagString: Untagged
@@ -2852,6 +2901,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &6588386505244644653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6588386505244644652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!23 &6632936558329861536
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2928,6 +2992,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!1 &6788585694380236576
 GameObject:
   m_ObjectHideFlags: 0
@@ -2959,6 +3026,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!33 &6818719559462967405
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3092,6 +3162,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!33 &7070369979722417846
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3135,6 +3208,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!33 &7643123777617565509
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3155,6 +3231,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!1 &7749246929154155582
 GameObject:
   m_ObjectHideFlags: 0
@@ -3305,6 +3384,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!23 &8553913529041521729
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3423,6 +3505,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!1 &8863602382337316417
 GameObject:
   m_ObjectHideFlags: 0
@@ -3502,6 +3587,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!33 &8882975579830852853
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3530,6 +3618,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!1 &9039081958942406112
 GameObject:
   m_ObjectHideFlags: 0
@@ -3561,6 +3652,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!4 &9123244593522164693
 Transform:
   m_ObjectHideFlags: 0
@@ -3588,6 +3682,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!4 &9142395338320858843
 Transform:
   m_ObjectHideFlags: 0
@@ -3615,6 +3712,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c0bd4bb621fd044ad75bf619e0ff04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomTransformBridge
+  debugPosition: {x: 0, y: 0, z: 0}
+  debugEulerAngles: {x: 0, y: 0, z: 0}
+  debugScale: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

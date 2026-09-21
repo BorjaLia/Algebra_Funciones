@@ -75,6 +75,7 @@ public class RubikInput : MonoBehaviour
 
         if (kb.mKey.isPressed) scale += new Vec3(1, 1, 1) * rootScaleSpeed * Time.deltaTime;
         if (kb.nKey.isPressed) scale -= new Vec3(1, 1, 1) * rootScaleSpeed * Time.deltaTime;
+        if (kb.bKey.isPressed) scale += new Vec3(1, 0, 0) * rootScaleSpeed * Time.deltaTime;
         t.localScale = scale;
     }
 
