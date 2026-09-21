@@ -620,5 +620,151 @@ namespace CustomMath
 
         #endregion
 
+        #region Intro Sort
+
+        /*
+         *  Costo computacional
+         *  Mejor:      O(n log n)
+         *  Promedio:   O(n log n)
+         *  Peor:       O(n log n)
+         *  
+         *  Complejidad espacial:   O(log n)
+         */
+        public static void IntroSort<T>(T[] array) where T : IComparable<T>
+        {
+            if (array == null || array.Length <= 1) return;
+
+            int n = array.Length;
+            int depthLimit = (int)(2 * Math.Floor(Math.Log(n) / Math.Log(2)));
+
+            SortDataUtil(0, n - 1, depthLimit);
+
+
+            void Swap(int i, int j)
+            {
+                T temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+
+            void MaxHeap(int i, int heapN, int begin)
+            {
+                T temp = array[begin + i - 1];
+                int child;
+
+                while (i <= heapN / 2)
+                {
+                    child = 2 * i;
+
+                    if (child < heapN && array[begin + child - 1].CompareTo(array[begin + child]) < 0)
+                        child++;
+
+                    if (temp.CompareTo(array[begin + child - 1]) >= 0)
+                        break;
+
+                    array[begin + i - 1] = array[begin + child - 1];
+                    i = child;
+                }
+                array[begin + i - 1] = temp;
+            }
+
+            void Heapify(int begin, int end, int heapN)
+            {
+                for (int i = heapN / 2; i >= 1; i--)
+                    MaxHeap(i, heapN, begin);
+            }
+
+            void HeapSort(int begin, int end)
+            {
+                int heapN = end - begin;
+
+                Heapify(begin, end, heapN);
+
+                for (int i = heapN; i >= 1; i--)
+                {
+                    Swap(begin, begin + i);
+                    MaxHeap(1, i, begin);
+                }
+            }
+
+            void InsertionSort(int left, int right)
+            {
+                for (int i = left; i <= right; i++)
+                {
+                    T key = array[i];
+                    int j = i;
+
+                    while (j > left && array[j - 1].CompareTo(key) > 0)
+                    {
+                        array[j] = array[j - 1];
+                        j--;
+                    }
+                    array[j] = key;
+                }
+            }
+
+            int FindPivot(int a, int b, int c)
+            {
+                if (array[a].CompareTo(array[b]) < 0)
+                {
+                    if (array[b].CompareTo(array[c]) < 0) return b;
+                    if (array[a].CompareTo(array[c]) < 0) return c;
+                    return a;
+                }
+                else
+                {
+                    if (array[a].CompareTo(array[c]) < 0) return a;
+                    if (array[b].CompareTo(array[c]) < 0) return c;
+                    return b;
+                }
+            }
+
+            int Partition(int low, int high)
+            {
+                T pivot = array[high];
+                int i = low - 1;
+
+                for (int j = low; j <= high - 1; j++)
+                {
+                    if (array[j].CompareTo(pivot) <= 0)
+                    {
+                        i++;
+                        Swap(i, j);
+                    }
+                }
+                Swap(i + 1, high);
+                return i + 1;
+            }
+
+            void SortDataUtil(int begin, int end, int currentDepthLimit)
+            {
+                if (end - begin > 16)
+                {
+                    if (currentDepthLimit == 0)
+                    {
+                        HeapSort(begin, end);
+                        return;
+                    }
+
+                    currentDepthLimit--;
+
+                    int mid = begin + ((end - begin) / 2) + 1;
+                    int pivotIdx = FindPivot(begin, mid, end);
+                    Swap(pivotIdx, end);
+
+                    int p = Partition(begin, end);
+
+                    SortDataUtil(begin, p - 1, currentDepthLimit);
+                    SortDataUtil(p + 1, end, currentDepthLimit);
+                }
+                else
+                {
+                    InsertionSort(begin, end);
+                }
+            }
+        }
+
+        #endregion
+
     }
 }
