@@ -162,7 +162,46 @@ namespace CustomMath
         }
 
         #endregion
-        
+
+        #region Insertion Sort
+
+        /*
+         *  Costo computacional
+         *  Mejor:      O(n)
+         *  Promedio:   O(n^2)
+         *  Peor:       O(n^2)
+         *  
+         *  Complejidad espacial:   O(1) auxiliar
+         */
+
+        /*
+         *  Insertion Sort construye el array final ordenado
+         *  elemento por elemento. Itera el arreglo y toma 
+         *  un elemento y lo inserta en su posición correcta 
+         *  dentro de la parte del arreglo que ya ha recorrido y ordenado.
+         */
+
+        public static void InsertionSort<T>(T[] array) where T : IComparable<T>
+        {
+            if (array == null || array.Length <= 1) return;
+
+            int n = array.Length;
+            for (int i = 1; i < n; ++i)
+            {
+                T key = array[i];
+                int j = i - 1;
+
+                while (j >= 0 && array[j].CompareTo(key) > 0)
+                {
+                    array[j + 1] = array[j];
+                    j = j - 1;
+                }
+                array[j + 1] = key;
+            }
+        }
+
+        #endregion
+
         #region Cocktail Shaker Sort
 
         /*
