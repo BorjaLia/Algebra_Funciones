@@ -5,6 +5,10 @@ public class CustomTransformBridge : MonoBehaviour
 {
     public MyTransform customTransform = new MyTransform();
 
+    [SerializeField] private Vector3 debugPosition;
+    [SerializeField] private Vector3 debugEulerAngles;
+    [SerializeField] private Vector3 debugScale;
+
     private void Awake()
     {
         customTransform.localPosition = new Vec3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
@@ -26,8 +30,17 @@ public class CustomTransformBridge : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.localPosition = new Vector3(customTransform.localPosition.x, customTransform.localPosition.y, customTransform.localPosition.z);
-        transform.localRotation = new Quaternion(customTransform.localRotation.x, customTransform.localRotation.y, customTransform.localRotation.z, customTransform.localRotation.w);
-        transform.localScale = new Vector3(customTransform.localScale.x, customTransform.localScale.y, customTransform.localScale.z);
+        Vec3 pos = customTransform.localPosition;
+        Quat rot = customTransform.localRotation;
+        Vec3 scale = customTransform.localScale;
+        Vec3 euler = customTransform.localEulerAngles;
+
+        transform.localPosition = new Vector3(pos.x, pos.y, pos.z);
+        transform.localRotation = new Quaternion(rot.x, rot.y, rot.z, rot.w);
+        transform.localScale = new Vector3(scale.x, scale.y, scale.z);
+
+        debugPosition = new Vector3(pos.x, pos.y, pos.z);
+        debugEulerAngles = new Vector3(euler.x, euler.y, euler.z);
+        debugScale = new Vector3(scale.x, scale.y, scale.z);
     }
 }
