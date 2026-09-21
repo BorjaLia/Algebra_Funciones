@@ -480,5 +480,85 @@ namespace CustomMath
 
         #endregion
 
+        #region Merge Sort
+
+        /*
+         *  Costo computacional
+         *  Mejor:      O(n log n)
+         *  Promedio:   O(n log n)
+         *  Peor:       O(n log n)
+         *  
+         *  Complejidad espacial:   O(n) auxiliar
+         */
+
+        public static void MergeSort<T>(T[] array) where T : IComparable<T>
+        {
+            if (array == null || array.Length <= 1) return;
+
+            MergeSortRecursive(array, 0, array.Length - 1);
+
+
+            void MergeSortRecursive(T[] arr, int l, int r)
+            {
+                if (l < r)
+                {
+                    int m = l + (r - l) / 2;
+
+                    MergeSortRecursive(arr, l, m);
+                    MergeSortRecursive(arr, m + 1, r);
+
+                    Merge(arr, l, m, r);
+                }
+            }
+
+            void Merge(T[] arr, int l, int m, int r)
+            {
+                int n1 = m - l + 1;
+                int n2 = r - m;
+
+                T[] L = new T[n1];
+                T[] R = new T[n2];
+
+                for (int idx = 0; idx < n1; ++idx)
+                    L[idx] = arr[l + idx];
+                for (int jdx = 0; jdx < n2; ++jdx)
+                    R[jdx] = arr[m + 1 + jdx];
+
+                int i = 0, j = 0;
+
+                int k = l;
+                while (i < n1 && j < n2)
+                {
+                    if (L[i].CompareTo(R[j]) <= 0)
+                    {
+                        arr[k] = L[i];
+                        i++;
+                    }
+                    else
+                    {
+                        arr[k] = R[j];
+                        j++;
+                    }
+                    k++;
+                }
+
+                while (i < n1)
+                {
+                    arr[k] = L[i];
+                    i++;
+                    k++;
+                }
+
+                while (j < n2)
+                {
+                    arr[k] = R[j];
+                    j++;
+                    k++;
+                }
+            }
+        }
+
+        #endregion
+
     }
 }
